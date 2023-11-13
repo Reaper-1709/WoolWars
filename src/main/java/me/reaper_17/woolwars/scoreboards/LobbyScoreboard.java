@@ -134,12 +134,12 @@ public class LobbyScoreboard {
 
         // Append blue points
         for (int i = 0; i < x; i++) {
-            pointString.append(ChatColor.AQUA + "●");
+            pointString.append(ChatColor.AQUA + "■");
         }
 
         // Append gray points
         for (int i = x; i < totalPoints; i++) {
-            pointString.append(ChatColor.GRAY + "●");
+            pointString.append(ChatColor.GRAY + "■");
         }
         pointString.append("]");
 
