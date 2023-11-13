@@ -1,0 +1,3 @@
+name: WoolWars
+version: '${project.version}'
+main: me.reaper_17.woolwars.WoolWars
