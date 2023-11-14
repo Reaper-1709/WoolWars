@@ -8,9 +8,6 @@ public class CommandManager {
 
     public CommandManager(WoolWars woolwars) {
         this.woolwars = woolwars;
-
-
-
         registerCommands();
     }
 
