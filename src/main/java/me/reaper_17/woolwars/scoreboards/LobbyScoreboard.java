@@ -1,6 +1,7 @@
 package me.reaper_17.woolwars.scoreboards;
 
 import me.reaper_17.woolwars.WoolWars;
+import me.reaper_17.woolwars.data.player.WoolWarsPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,6 +16,9 @@ import java.util.TimeZone;
 public class LobbyScoreboard {
     private static int counter = 0;
     public static void showLobbyScoreboard(Player p){
+
+        WoolWarsPlayer player = WoolWarsPlayer.findWoolWarPlayer(p);
+
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         Scoreboard lobbyScoreboard = scoreboardManager.getNewScoreboard();
         Objective title = lobbyScoreboard.registerNewObjective("wool wars", "dummy");
@@ -73,15 +77,15 @@ public class LobbyScoreboard {
         Score blank1 = title.getScore("    ");
         blank1.setScore(10);
 
-        int level = 3;
+        int level = p.getLevel();
         Score levelScore = title.getScore(ChatColor.WHITE + "Level: " + ChatColor.GRAY + "[" + level + "❤]");
         levelScore.setScore(9);
 
         Score blank2 = title.getScore("   ");
         blank2.setScore(8);
 
-        String currentXp = "1k";
-        String finalXp = "3k";
+        String currentXp = simplifyCurrentXp(player.getCurrentXp());
+        String finalXp = simplifyFinalXp(player.getFinalXp());
         Score progressScore = title.getScore(ChatColor.WHITE + "Progress: " + ChatColor.AQUA + currentXp + ChatColor.GRAY + "/" + ChatColor.GREEN + finalXp);
         progressScore.setScore(7);
         float currentXpNumber;
@@ -110,11 +114,11 @@ public class LobbyScoreboard {
         Score blank3 = title.getScore("  ");
         blank3.setScore(5);
 
-        int wool = 250; //use player.getWool() later on
+        int wool = player.getWool();
         Score woolScore = title.getScore(ChatColor.WHITE + "Wool: " + ChatColor.GOLD + wool);
         woolScore.setScore(4);
 
-        int layers = 0; //use player.getWoolLayers() later on
+        int layers = player.getLayers();
         Score layerScore = title.getScore(ChatColor.WHITE + "Layers: " + ChatColor.GREEN + layers);
         layerScore.setScore(3);
 
@@ -144,5 +148,19 @@ public class LobbyScoreboard {
         pointString.append("]");
 
         return pointString.toString();
+    }
+
+    public static String simplifyCurrentXp(int currentXp){
+        if (currentXp > 1000){
+            return (currentXp / 1000) + "k";
+        }
+        return String.valueOf(currentXp);
+    }
+
+    public static String simplifyFinalXp(int finalXp){
+        if (finalXp > 1000){
+            return (finalXp / 1000) + "k";
+        }
+        return String.valueOf(finalXp);
     }
 }

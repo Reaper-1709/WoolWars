@@ -1,5 +1,7 @@
 package me.reaper_17.woolwars.data.player;
 
+import me.reaper_17.woolwars.WoolWars;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class WoolWarsPlayer {
@@ -107,4 +109,13 @@ public class WoolWarsPlayer {
         this.ignoreLeaderboard = ignoreLeaderboard;
     }
 
+    public static WoolWarsPlayer findWoolWarPlayer(Player player){
+        for (WoolWarsPlayer p : WoolWars.getWoolWarsPlayers()){
+            if (p.getPlayer().equals(player)){
+                return p;
+            }
+        }
+        Bukkit.getLogger().severe(player.getName() + " is not a valid WoolWarsWorld. Contact developer or admin to fix the issue.");
+        return null;
+    }
 }
