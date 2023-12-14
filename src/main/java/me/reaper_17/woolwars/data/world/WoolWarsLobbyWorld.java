@@ -5,11 +5,11 @@ import me.reaper_17.woolwars.enums.WorldType;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-public class WoolWarsWorld {
+public class WoolWarsLobbyWorld {
     private World bukkitWorld;
     private WorldType worldType;
 
-    public WoolWarsWorld(World bukkitWorld, WorldType worldType){
+    public WoolWarsLobbyWorld(World bukkitWorld, WorldType worldType){
         this.bukkitWorld = bukkitWorld;
         this. worldType = worldType;
     }
@@ -30,10 +30,10 @@ public class WoolWarsWorld {
         this.worldType = worldType;
     }
 
-    public static WoolWarsWorld findWoolWarsWorld(World world){
-        for (WoolWarsWorld woolWarsWorld : WoolWars.getWoolWarsWorlds()){
-            if (woolWarsWorld.getBukkitWorld().equals(world)){
-                return woolWarsWorld;
+    public static WoolWarsLobbyWorld findWoolWarsWorld(World world){
+        for (WoolWarsLobbyWorld woolWarsLobbyWorld : WoolWars.getWoolWarsLobbyWorlds()){
+            if (woolWarsLobbyWorld.getBukkitWorld().equals(world)){
+                return woolWarsLobbyWorld;
             }
         }
         Bukkit.getLogger().severe(world.getName() + " is not a valid WoolWarsWorld. Contact developer or admin to fix the issue.");

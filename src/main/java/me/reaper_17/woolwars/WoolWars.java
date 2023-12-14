@@ -3,7 +3,7 @@ package me.reaper_17.woolwars;
 import lombok.Getter;
 import me.reaper_17.woolwars.data.player.WoolWarsPlayer;
 import me.reaper_17.woolwars.data.server.DatabaseConfigurator;
-import me.reaper_17.woolwars.data.world.WoolWarsWorld;
+import me.reaper_17.woolwars.data.world.WoolWarsLobbyWorld;
 import me.reaper_17.woolwars.events.BasicLobbyEvents;
 import me.reaper_17.woolwars.events.JoinScoreShowEvent;
 import me.reaper_17.woolwars.managers.*;
@@ -18,7 +18,7 @@ public final class WoolWars extends JavaPlugin {
     public static WoolWars instance;
 
     @Getter
-    public static Collection<WoolWarsWorld> woolWarsWorlds = new ArrayList<>();
+    public static Collection<WoolWarsLobbyWorld> woolWarsLobbyWorlds = new ArrayList<>();
 
     //there is no need to persist this woolWarsPlayers list as the values will be directly stored to db
     @Getter
@@ -49,6 +49,7 @@ public final class WoolWars extends JavaPlugin {
         new CommandManager();
         new ConfigManager(this);
         new DatabaseConfigManager();
+        new KitsManager();
     }
 
     private void registerEvents() {

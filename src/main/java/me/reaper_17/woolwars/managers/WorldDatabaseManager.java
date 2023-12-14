@@ -1,7 +1,7 @@
 package me.reaper_17.woolwars.managers;
 
 import me.reaper_17.woolwars.WoolWars;
-import me.reaper_17.woolwars.data.world.WoolWarsWorld;
+import me.reaper_17.woolwars.data.world.WoolWarsLobbyWorld;
 import me.reaper_17.woolwars.enums.WorldType;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -11,7 +11,7 @@ import java.sql.*;
 public class WorldDatabaseManager {
     public static void uploadToDatabase(String jdbcUrl, String username, String password){
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)){
-            for (WoolWarsWorld world : WoolWars.getWoolWarsWorlds()){
+            for (WoolWarsLobbyWorld world : WoolWars.getWoolWarsLobbyWorlds()){
                 String name = world.getBukkitWorld().getName();
                 String type = world.getWorldType().toString();
                 String insertQuery = "INSERT INTO world (name, type) VALUES (?, ?)";
@@ -22,7 +22,7 @@ public class WorldDatabaseManager {
                     statement.executeUpdate();
                 }
             }
-            WoolWars.getWoolWarsWorlds().clear();
+            WoolWars.getWoolWarsLobbyWorlds().clear();
         }
         catch (SQLException e){
             Bukkit.getLogger().severe("Error occurred: " + e.getMessage());
@@ -38,8 +38,8 @@ public class WorldDatabaseManager {
                     World bukkitWorld = Bukkit.getWorld(set.getString("name"));
                     WorldType type = WorldType.valueOf(set.getString("type"));
 
-                    WoolWarsWorld world = new WoolWarsWorld(bukkitWorld, type);
-                    WoolWars.getWoolWarsWorlds().add(world);
+                    WoolWarsLobbyWorld world = new WoolWarsLobbyWorld(bukkitWorld, type);
+                    WoolWars.getWoolWarsLobbyWorlds().add(world);
                 }
             }
         }
